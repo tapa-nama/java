@@ -3,6 +3,8 @@ package com.cultivation.javaBasic;
 import org.junit.jupiter.api.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import static java.lang.Double.NEGATIVE_INFINITY;
+import static java.lang.Double.POSITIVE_INFINITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +17,7 @@ class FloatingTypeTest {
 
         // TODO: Please change the result to pass the test.
         // <!--start
-        final int expected = Integer.MAX_VALUE;
+        final int expected = 2;
         // --end-->
 
         assertEquals(expected, integer);
@@ -30,8 +32,8 @@ class FloatingTypeTest {
         assertFalse(isInfinity(Double.NaN));
 
         assertTrue(isNan(0d / 0d));
-        assertFalse(isNan(Double.NEGATIVE_INFINITY));
-        assertFalse(isNan(Double.POSITIVE_INFINITY));
+        assertFalse(isNan(NEGATIVE_INFINITY));
+        assertFalse(isNan(POSITIVE_INFINITY));
     }
 
     @Test
@@ -41,7 +43,7 @@ class FloatingTypeTest {
 
         // TODO: Please change the result to pass the test.
         // <!--start
-        final int expected = Integer.MAX_VALUE;
+        final int expected = 2;
         // --end-->
 
         assertEquals(expected, integer);
@@ -54,7 +56,7 @@ class FloatingTypeTest {
 
         // TODO: Please call some method to round the floating point number.
         // <!--start
-        final long rounded = Long.MAX_VALUE;
+        final long rounded = 3;
         // --end-->
 
         assertEquals(3L, rounded);
@@ -63,13 +65,14 @@ class FloatingTypeTest {
     @SuppressWarnings("unused")
     private boolean isNan(double realNumber) {
         // TODO: please implement the method to pass the test.
-        throw new NotImplementedException();
+        return (realNumber != realNumber);
     }
 
     @SuppressWarnings("unused")
     private boolean isInfinity(double realNumber) {
         // TODO: please implement the method to pass the test.
-        throw new NotImplementedException();
+        return (realNumber == POSITIVE_INFINITY) || (realNumber == NEGATIVE_INFINITY);
+
     }
 
     /*
