@@ -3,8 +3,8 @@ package com.cultivation.javaBasic;
 import org.junit.jupiter.api.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static java.lang.Integer.toBinaryString;
+import static org.junit.jupiter.api.Assertions.*;
 
 class IntegerTypeTest {
 
@@ -21,7 +21,24 @@ class IntegerTypeTest {
 
         assertEquals(maximumSymbol, maximum);
         assertEquals(minimumSymbol, minimum);
+
     }
+
+//    @Test
+//    void should_be_negative() {
+//        for (int i = Integer.MIN_VALUE; i < 0; i++) {
+//            assertEquals(1, i >>> 31);
+//        }
+//
+//        int num1 = 1;
+//        for (int j = 0; j < 31; j++) {
+//            assertTrue((num1 << 1) > 0);
+//        }
+//
+//        assertTrue(0x80000000 < 0);
+//        assertEquals(0xF0000000, (0xE0000000 >> 1));
+//    }
+
 
     @Test
     void should_get_range_of_primitive_short_type() {
@@ -36,6 +53,17 @@ class IntegerTypeTest {
 
         assertEquals(maximumSymbol, maximum);
         assertEquals(minimumSymbol, minimum);
+
+//        assertEquals(maximum, 0x7fff);
+//        assertEquals((short) 0x8000, Short.MIN_VALUE);
+//        assertTrue((-0x80000000) < 0);
+//        assertTrue((-0x7FFFFFFF) < 0);
+//        assertTrue((-0xFFFFFFFF) > 0);
+
+
+//        assertEquals(0x80000000, -0x80000000);
+//        assertNotEquals(0x1, -0x1);
+
     }
 
     @Test
@@ -79,6 +107,11 @@ class IntegerTypeTest {
         // --end-->
 
         assertEquals(expectedResult, theNumberWillOverflow);
+//        System.out.println(theNumberWillOverflow);
+//
+//        System.out.println(theNumberWillOverflow + 2);
+//        System.out.print(theNumberWillOverflow + theNumberWillOverflow);
+
     }
 
     @Test
@@ -136,6 +169,14 @@ class IntegerTypeTest {
         assertEquals(expected, smallerInteger);
     }
 
+//    @Test
+//    void should_reserve_signed_digit() {
+//        final int integer = 0x1123_8000;
+//        final short shorter = (short) integer;
+//
+//        assertEquals(-0x8000, shorter);
+//    }
+
     @Test
     void should_increment() {
         int integer = 3;
@@ -171,11 +212,7 @@ class IntegerTypeTest {
     private int add(int left, int right) {
         // TODO: Please implement the method. Adding two numbers.
         // The method should throw ArithmeticException if overflow or underflow happens.
-        try {
-            return Math.addExact(left, right);
-        } catch (ArithmeticException e) {
-            throw e;
-        }
+        return Math.addExact(left, right);
     }
 
     /*
