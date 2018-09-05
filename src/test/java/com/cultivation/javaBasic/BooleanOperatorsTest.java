@@ -72,4 +72,19 @@ class BooleanOperatorsTest {
 
         assertEquals(expected, ~value);
     }
+
+    @Test
+    void test_the_priority_of_operator() {
+        final int value1 = 0x0000_ffff;
+        final int value2 = 0xffff_0000;
+        final int value3 = 0x1234_abcd;
+
+        //result: ~ > & > |
+        assertEquals(0x1234_abcd, value1 & value2 | value3);
+        assertEquals(0x1234_ffff, value1 | value2 & value3);
+        assertEquals(0xffff_0000, ~value1 & value2);
+        assertEquals(0x0000_ffff, value1 & ~value2);
+        assertEquals(0xffff_0000, ~value1 | value2);
+        assertEquals(0x0000_ffff, value1 | ~value2);
+    }
 }

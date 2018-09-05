@@ -17,14 +17,20 @@ public class InitializationOrderClass {
 
     private final Object field = initField();
 
+
+    {
+        logger.add("Initialization Block1");
+    }
+
     private Object initField() {
         logger.add("Field Initializer");
         return null;
     }
 
     {
-        logger.add("Initialization Block");
+        logger.add("Initialization Block2");
     }
+
 
     public InitializationOrderClass() {
         this(4);
@@ -34,4 +40,6 @@ public class InitializationOrderClass {
     public InitializationOrderClass(int argument) {
         logger.add("Constructor with argument");
     }
+
+
 }

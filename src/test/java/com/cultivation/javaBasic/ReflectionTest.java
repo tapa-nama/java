@@ -15,7 +15,7 @@ class ReflectionTest {
 
         // TODO: please modify the following code to pass the test
         // <--start
-        final Class<? extends Employee> expected = null;
+        final Class<? extends Employee> expected = Employee.class;
         // --end-->
 
         assertEquals(expected, employeeClass);
@@ -28,7 +28,7 @@ class ReflectionTest {
 
         // TODO: please modify the following code to pass the test
         // <--start
-        final String expected = null;
+        final String expected = "com.cultivation.javaBasic.util.Employee";
         // --end-->
 
         assertEquals(expected, employeeClass.getName());
@@ -41,7 +41,7 @@ class ReflectionTest {
 
         // TODO: please created an instance described by `theClass`
         // <--start
-        Employee instance = null;
+        Employee instance = (Employee) theClass.newInstance();
         // --end-->
 
         assertEquals("Employee", instance.getTitle());
