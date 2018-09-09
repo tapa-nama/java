@@ -45,7 +45,7 @@ Object 的默认值为null.
 
 没有无符号左移(<<<)是因为左移都是在右边补0,而符号位位于首位,对于左移来说没有signed和unsigned之分.
 
-###4. 逻辑运算符(Logical Operator)和按位运算符(Bitwise Operator)
+### 4. 逻辑运算符(Logical Operator)和按位运算符(Bitwise Operator)
 
 **a && b:** a与b均为true时才为true, 若a为false则返回false不再判断b(短路效应). 
 
@@ -90,7 +90,7 @@ Object 的默认值为null.
 
 `a = ++i; //先执行 i + 1操作,再对a赋值`
 
-###7. 异常处理
+### 7. 异常处理
 
 需要处理异常时要用try-catch,  直接抛出时不用try-catch.
 
@@ -122,7 +122,7 @@ char类型使用UTF-16编码, 包含2个字节.
 
 codePoint包含2个或4个字节,所以一个codePoint可以表示一个或两个char.
 
-###11. final关键字
+### 11. final关键字
 
 final 变量为常量, 因此必须进行初始化.
 
