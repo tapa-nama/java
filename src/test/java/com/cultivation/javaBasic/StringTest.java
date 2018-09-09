@@ -3,6 +3,8 @@ package com.cultivation.javaBasic;
 import org.junit.jupiter.api.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -292,11 +294,14 @@ class StringTest {
     private int[] getCodePointsFromString(String withSurrogatePairs) {
         // TODO: please implement the method to the pass the test
         // <--start
-        int[] result = new int[withSurrogatePairs.length()];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = (int) withSurrogatePairs.charAt(i);
+        if (withSurrogatePairs == null) return null;
+        int[] result = new int[withSurrogatePairs.codePointCount(0, withSurrogatePairs.length())];
+        for (int charIndex = 0, codePointIndex = 0; charIndex < withSurrogatePairs.length();
+             charIndex += Character.charCount(Character.codePointAt(withSurrogatePairs, charIndex))) {
+            result[codePointIndex++] = withSurrogatePairs.codePointAt(charIndex);
         }
         return result;
+
 
         // --end-->
     }
