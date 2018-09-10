@@ -221,17 +221,16 @@ equals方法:先判断是否为同一个对象;判断是否为空;判断是否�
 
 1. 多实现（类的单继承）
 2. 接口不能自我实现
-3. except static or default
-4. field 可以为static，final，public
-5. 不能实例化
-6. 接口只能extends 接口，不能实现接口
-7. 子类必须实现接口中的所有方法
-8. 实现类不能继承static方法
-9. 方法默认为public
-10. default方法被继承
-11. 接口默认为abstract
-12. 接口的modifier默认为package private
-13. 若一个类实现了多个接口且这些接口中的default方法包含同样的方法签名,当该类要调用某一个接口中的方法时,需要使用`接口名.super.方法名()`调用,或者需要在子类中重写该方法.
+3. field 可以为static，final，public
+4. 不能实例化
+5. 接口只能extends 接口，不能实现接口
+6. 子类必须实现接口中的所有方法
+7. 实现类不能继承static方法
+8. 方法默认为public
+9. default方法被继承
+10. 接口默认为abstract
+11. 接口的modifier默认为package private
+12. 若一个类实现了多个接口且这些接口中的default方法包含同样的方法签名,当该类要调用某一个接口中的方法时,需要使用`接口名.super.方法名()`调用,或者需要在子类中重写该方法.
 
 ### 19. 方法签名
 
