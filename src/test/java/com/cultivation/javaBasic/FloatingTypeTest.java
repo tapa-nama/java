@@ -33,12 +33,6 @@ class FloatingTypeTest {
         float floater2 = 1L;
         double doubler2 = 1L;
 
-
-
-
-
-
-
         //implicit
         assertEquals(shorter, byter);
         assertEquals(integer, byter);

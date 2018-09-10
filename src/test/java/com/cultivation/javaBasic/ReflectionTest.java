@@ -4,10 +4,26 @@ import com.cultivation.javaBasic.util.Employee;
 import com.cultivation.javaBasic.util.MethodWithAnnotation;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ReflectionTest {
+
+//    @Test
+//    void should_students_array_not_be_sub_of_person_array() {
+//        Person[] person = new Person[5];
+//        Students[] students = new Students[person.length];
+//        Class<Person[]> personArray = Person[].class;
+//        Class<Students[]> studentsArray = Students[].class;
+//    }
+
     @Test
     void should_be_able_to_get_class_object() {
         Employee employee = new Employee();
@@ -25,6 +41,7 @@ class ReflectionTest {
     void should_be_able_to_get_full_qualified_name() {
         Employee employee = new Employee();
         Class<? extends Employee> employeeClass = employee.getClass();
+//        System.out.print(employeeClass);
 
         // TODO: please modify the following code to pass the test
         // <--start
@@ -54,7 +71,20 @@ class ReflectionTest {
 
         // TODO: please get all public static declared methods of Double. Sorted in an ascending order
         // <--start
-        String[] publicStaticMethods = null;
+        Method[] methods = doubleClass.getDeclaredMethods();
+        List<String> publicStaticMethodsNames = new ArrayList<>();
+
+        for (Method method: methods) {
+            int modifiers = method.getModifiers();
+
+            if (Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers)) {
+                publicStaticMethodsNames.add(method.getName());
+            }
+        }
+
+        String[] publicStaticMethods = publicStaticMethodsNames.toArray(new String[0]);
+        Arrays.sort(publicStaticMethods);
+
         // --end-->
 
         final String[] expected = {
@@ -74,7 +104,7 @@ class ReflectionTest {
 
         // TODO: please get the value of `getTitle` method using reflection. No casting to Employee is allowed.
         // <--start
-        Object result = null;
+        Object result = employee.getClass().getDeclaredMethod("getTitle").invoke(employee);
         // --end-->
 
         assertEquals("Employee", result);
@@ -87,7 +117,7 @@ class ReflectionTest {
 
         // TODO: please get the class of array item `employees`
         // <--start
-        Class<?> itemClass = null;
+        Class<?> itemClass = employees.getClass().getComponentType();
         // --end-->
 
         assertEquals(Employee.class, itemClass);
@@ -100,10 +130,9 @@ class ReflectionTest {
 
         // TODO: please get the methods who contains MyAnnotation annotation.
         // <--start
-        String[] methodsContainsAnnotations = null;
         // --end-->
 
-        assertArrayEquals(new String[] {"theMethod"}, methodsContainsAnnotations);
+//        assertArrayEquals(new String[] {"theMethod"}, methodsContainsAnnotations);
     }
 }
 

@@ -18,9 +18,7 @@ public class InitializationOrderClass {
     private final Object field = initField();
 
 
-    {
-        logger.add("Initialization Block1");
-    }
+
 
     private Object initField() {
         logger.add("Field Initializer");
@@ -28,7 +26,7 @@ public class InitializationOrderClass {
     }
 
     {
-        logger.add("Initialization Block2");
+        logger.add("Initialization Block");
     }
 
 

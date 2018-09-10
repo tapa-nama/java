@@ -1,4 +1,5 @@
 package com.cultivation.javaBasic;
 
-public interface IntFunc {
+public interface IntSupplier {
+    int getAsInt();
 }

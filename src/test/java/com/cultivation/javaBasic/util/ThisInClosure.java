@@ -8,6 +8,11 @@ public class ThisInClosure {
 
     @SuppressWarnings("Convert2MethodRef")
     public StringFunc getLambda() {
-        return () -> this.toString();
+        return new StringFunc() {
+            @Override
+            public String getString() {
+                return ThisInClosure.this.toString();
+            }
+        };
     }
 }

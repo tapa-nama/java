@@ -1,4 +1,6 @@
 package com.cultivation.javaBasic;
 
-public class Students {
+import com.cultivation.javaBasic.util.Person;
+
+public class Students implements Person {
 }

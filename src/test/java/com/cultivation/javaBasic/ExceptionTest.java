@@ -11,17 +11,19 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ExceptionTest {
     @Test
+//    StringFormatException extends Exception extends Throwable
+//    基类初始化时先调用父类的构造函数（隐式无参，显式有参），使用super(message);这里的super一直调到Throwable；
+//    getMessage()是子类向上寻找一直到Throwable的方法。
     void should_customize_exception() {
         try {
-            throw new StringFormatException("the message");
+            throw new StringFormatException("message");
         } catch (StringFormatException error) {
-            assertEquals("the message", error.getMessage());
+            assertEquals("message", error.getMessage());
+            assertEquals(null, error.getCause());
         }
     }
 
@@ -43,7 +45,7 @@ class ExceptionTest {
 
         // TODO: please modify the following code to pass the test
         // <--start
-        final int expectedResult = Integer.MAX_VALUE;
+        final int expectedResult = 0;
         // --end-->
 
         assertEquals(expectedResult, confusedResult);
@@ -53,14 +55,13 @@ class ExceptionTest {
     @Test
     void should_use_the_try_pattern() {
         ClosableStateReference closableStateReference = new ClosableStateReference();
-        try (MyClosableType closable = new MyClosableType(closableStateReference))
-        {
+        try (MyClosableType closable = new MyClosableType(closableStateReference)) {
             assertFalse(closable.isClosed());
         }
 
         // TODO: please modify the following code to pass the test
         // <--start
-        final Optional<Boolean> expected = Optional.empty();
+        final Optional<Boolean> expected = Optional.of(true);
         // --end-->
 
         assertEquals(expected.get(), closableStateReference.isClosed());
@@ -68,6 +69,7 @@ class ExceptionTest {
 
     @SuppressWarnings({"EmptyTryBlock", "unused"})
     @Test
+    //try-with-resource多个resource执行close的顺序
     void should_call_closing_even_if_exception_throws() throws Exception {
         ArrayList<String> logger = new ArrayList<>();
 
@@ -81,12 +83,12 @@ class ExceptionTest {
 
         // TODO: please modify the following code to pass the test
         // <--start
-        final String[] expected = {};
+        final String[] expected = {"ClosableWithException.close", "ClosableWithoutException.close"};
         // --end-->
 
         assertArrayEquals(
-            expected,
-            logger.toArray());
+                expected,
+                logger.toArray());
     }
 
     @Test
@@ -94,9 +96,14 @@ class ExceptionTest {
         String methodName = StackFrameHelper.getCurrentMethodName();
 
         assertEquals(
-            "com.cultivation.javaBasic.ExceptionTest.should_get_method_name_in_stack_frame",
-            methodName);
+                "com.cultivation.javaBasic.ExceptionTest.should_get_method_name_in_stack_frame",
+                methodName);
     }
+
+
+
+
+
 
     @SuppressWarnings({"ReturnInsideFinallyBlock", "SameParameterValue"})
     private int confuse(int value) {
@@ -110,7 +117,7 @@ class ExceptionTest {
     }
 }
 
-/*
+/*  hibachi: 木炭火炉
  * - Please draw the hibachi of `Throwable` and explain the main purpose for each type.
  * - When do you have to declare a exception in the method signature.
  * - When you declare a class A in package PA, and A contains a method

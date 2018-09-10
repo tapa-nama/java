@@ -15,7 +15,7 @@
 |                  |                          |              Min              |              Max               | Default(for fields) |
 | :--------------: | :----------------------: | :---------------------------: | :----------------------------: | :-----------------: |
 |       byte       |       signed 8-bit       |             -128              |              127               |          0          |
-|      short       |      signed 16-bit       |    -2^15/**(short)**0x8000    |         2^15-1/0x7fff          |          0          |
+|      short       |      signed 16-bit       |    -2^15/0x8000    |         2^15-1/0x7fff          |          0          |
 |  int(默认存储)   |      signed 32-bit       |       -2^31/0x8000_0000       |       2^31-1/0x7fff_ffff       |          0          |
 |       long       |      signed 64-bit       | -2^63/ 0x8000_0000_0000_0000L | 2^63-1/ 0x7fff_ffff_ffff_ffffL |         0L          |
 |      float       | single-precision  32-bit |                               |                                |        0.0f         |
@@ -118,7 +118,7 @@ Object 的默认值为null.
 
 ### 10.  char和codePoint
 
-char类型使用UTF-16编码, 包含2个字节.
+char类型使用UTF-16编码（包含2个/4个字节）.
 
 codePoint包含2个或4个字节,所以一个codePoint可以表示一个或两个char.
 
@@ -139,8 +139,6 @@ String是不可变的(immutable),一旦被创建就不可再被改变,因此对S
 但可以使用StringBuffer类来操作字符串,就不会产生多余的中间对象, StringBuffer是线程安全的.
 
 StringBuilder与StringBuffer类似,但线程不安全.
-
-执行速度: StringBuilder > StringBuffer > String
 
 如果操作少量数据,使用String即可;
 

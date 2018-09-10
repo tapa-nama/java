@@ -4,6 +4,7 @@ import com.cultivation.javaBasic.showYourIntelligence.PersonForEquals;
 import com.cultivation.javaBasic.util.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -95,13 +96,13 @@ class InheritanceTest {
     @Test
     void should_use_caution_when_dealing_with_array_type() {
         DerivedFromSuperClassWithDefaultConstructor[] derivedClassArray = new DerivedFromSuperClassWithDefaultConstructor[4];
-        SuperClassWithDefaultConstructor[] superClassArray = (SuperClassWithDefaultConstructor[])derivedClassArray;
+        SuperClassWithDefaultConstructor[] superClassArray = (SuperClassWithDefaultConstructor[]) derivedClassArray;
         boolean expected = false;
 
         try {
             superClassArray[superClassArray.length - 1] = new SuperClassWithDefaultConstructor();
         } catch (Exception error) {
-             expected = true;
+            expected = true;
         }
 
         assertTrue(expected);
@@ -232,6 +233,19 @@ class InheritanceTest {
         assertNotEquals(person.hashCode(), different1.hashCode());
         assertNotEquals(person.hashCode(), different2.hashCode());
         assertEquals(person.hashCode(), samePerson.hashCode());
+    }
+
+    @Test
+    void should_sort_by_alphabetic_ascending_order_and_age() {
+        PersonForEquals person1 = new PersonForEquals("James", (short) 1990);
+        PersonForEquals person2 = new PersonForEquals("James", (short) 1992);
+        PersonForEquals person3 = new PersonForEquals("Alice", (short) 1990);
+
+        PersonForEquals[] personsWithOrder = new PersonForEquals[]{person1, person2, person3};
+        PersonForEquals[] expectedResult = new PersonForEquals[]{person3, person1, person2};
+
+        Arrays.sort(personsWithOrder);
+        assertArrayEquals(expectedResult, personsWithOrder);
     }
 }
 
