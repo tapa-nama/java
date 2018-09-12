@@ -2,13 +2,13 @@ package com.cultivation.javaBasic;
 
 import com.cultivation.javaBasic.showYourIntelligence.DistinctIterable;
 import com.cultivation.javaBasic.showYourIntelligence.Sequence;
+import com.cultivation.javaBasic.showYourIntelligence.YottabytesNumber;
 import com.cultivation.javaBasic.util.RandomCharacterIterable;
 import org.junit.jupiter.api.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CollectionsTest {
     @Test
@@ -29,7 +29,9 @@ class CollectionsTest {
         // TODO: you could ONLY use `Iterator.hasNext` and `Iterator.next` API to copy items to a `List`. No `for` is
         // allowed.
         // <--start
-
+        while (iterator.hasNext()) {
+            list.add(iterator.next());
+        }
         // --end-->
 
         return list;
@@ -55,9 +57,10 @@ class CollectionsTest {
         iterator.previous();
         iterator.remove();
 
+
         // TODO: please modify the following code to pass the test
         // <--start
-        final List<String> expected = Arrays.asList("I", "Don't", "Know");
+        final List<String> expected = Arrays.asList("Amy", "Bob", "Carl");
         // --end-->
 
         assertIterableEquals(expected, staff);
@@ -68,8 +71,8 @@ class CollectionsTest {
         // NOTE: This test may execute for a while. But it is okay if your impl is correct.
         final int oneGagaChars = 1024 * 1024 * 1024;
         RandomCharacterIterable characters = new RandomCharacterIterable(
-            oneGagaChars,
-            new Character[]{'a', 'b'});
+                oneGagaChars,
+                new Character[]{'a', 'b'});
 
         List<Character> distinct = new DistinctIterable<>(characters).toList();
         distinct.sort(Character::compareTo);
@@ -89,16 +92,36 @@ class CollectionsTest {
 
         // TODO: please modify the following code to pass the test
         // <--start
-        final List<Integer> expected = Arrays.asList(0, 0, 0);
+        final List<Integer> expected = Arrays.asList(0, 1, 2, 10, 11);
         // --end-->
 
         assertIterableEquals(expected, integers);
     }
+
+    @Test
+    void should_change_the_value_of_Integer_when_change_its_element() {
+        Integer test = new Integer(1);
+        Integer temp = test;
+        test++;
+        assertEquals(2, test.intValue());
+///        assertEquals(temp, test);
+        assertSame(test, test++);
+        assertTrue(!test.equals(temp));
+    }
+
+    @Test
+    void should_get_the_correct_number_of_yottabyte_numbers() {
+        final long RANGE = 1024 * 1024 * 1024 * 1024L;
+
+        YottabytesNumber yottabytesNumber = new YottabytesNumber();
+        int number = yottabytesNumber.getYottaNum(1, RANGE);
+        assertEquals(15, number);
+    }
 }
 
 /*
- * - Can you expect the order returned when iterating over a `HashSet<T>`?
- * - What is an `ArrayList`, `LinkedList`, `ArrayDeque`, `HashSet`, `HashSet`, `TreeSet`, `EnumSet`, `LinkedHashSet`,
+ * - Can you expect the order returned when iterating over a `HashSet<T>`?  不保证有序
+ * - What is an `ArrayList`, `LinkedList`, `ArrayDeque`, `HashSet`, `TreeSet`, `EnumSet`, `LinkedHashSet`,
  *   `PriorityQueue`, `HashMap`, `TreeMap`, `EnumMap`, `LinkedHashMap`
  * - What if an collection is modified while an iterator is still iterating?
  * - Can you add or remove items to the list that is returned by `Array.asList` or `Collections.nCopies`?
