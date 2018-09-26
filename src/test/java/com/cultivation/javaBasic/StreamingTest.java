@@ -47,7 +47,7 @@ class StreamingTest {
         {
             assertArrayEquals(
                     words,
-                    wordStream.toArray(value -> new String[value])
+                    wordStream.toArray(String[]::new)
             );
         }
     }
@@ -463,9 +463,7 @@ class StreamingTest {
         // TODO: please implement toMap collector using `stream.collect`. You cannot use existing `toMap` collector.
         // <--start
         HashMap<String, Integer> map = stream.collect(HashMap::new,
-                (myMap, ele) -> {
-                    myMap.put(ele.getKey(), ele.getValue());
-                },
+                (myMap, ele) -> myMap.put(ele.getKey(), ele.getValue()),
                 HashMap::putAll);
         // --end-->
 

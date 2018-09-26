@@ -11,13 +11,13 @@ class BooleanOperatorsTest {
     @Test
     void should_perform_logical_boolean_operations() {
         boolean[] actualResults = {
-                true && true,
+                true && true,  //短路计算
                 true && false,
                 false && false,
                 true || true,
                 true || false,
                 false || false,
-                true & true,
+                true & true,   //不短路，两边都会执行
                 true & false,
                 false & false,
                 true | true,

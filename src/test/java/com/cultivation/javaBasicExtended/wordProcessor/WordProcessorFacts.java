@@ -11,7 +11,7 @@ class WordProcessorFacts {
         final int validWidth = 10;
 
         assertThrows(IllegalArgumentException.class, () ->
-            new TextProcessor(validWidth).process(null));
+                new TextProcessor(validWidth).process(null));
     }
 
     @Test
@@ -20,7 +20,7 @@ class WordProcessorFacts {
 
         for (int invalidWidth : invalidWidths) {
             assertThrows(IllegalArgumentException.class, () ->
-                new TextProcessor(invalidWidth).process(null));
+                    new TextProcessor(invalidWidth).process(null));
         }
     }
 
@@ -31,12 +31,19 @@ class WordProcessorFacts {
     }
 
     @Test
+    void should_process_single_long_word() {
+        String longProcessed = new TextProcessor(10).process("helloworldIWantToLearnJavaVeryWell");
+        assertEquals("helloworldIWantToLearnJavaVeryWell(1,2,3,4);", longProcessed);
+
+    }
+
+    @Test
     void should_process_multiple_word_in_single_line() {
         String processed = new TextProcessor(30).process(
-            "The main theme of education in engineering school is learning to teach yourself");
+                "The main theme of education in engineering school is learning to teach yourself");
         assertEquals(
-            "The(1); (1);main(1); (1);theme(1); (1);of(1); (1);education(1); (1);in(1); (2);engineering(2); (2);school(2); (2);is(2); (2);learning(2,3); (3);to(3); (3);teach(3); (3);yourself(3);",
-            processed
+                "The(1); (1);main(1); (1);theme(1); (1);of(1); (1);education(1); (1);in(1); (2);engineering(2); (2);school(2); (2);is(2); (2);learning(2,3); (3);to(3); (3);teach(3); (3);yourself(3);",
+                processed
         );
     }
 
@@ -44,8 +51,8 @@ class WordProcessorFacts {
     void should_process_multiple_word_in_single_line_continued() {
         String processed = new TextProcessor(10).process("So   many whitespaces");
         assertEquals(
-            "So(1);   (1);many(1); (1);whitespaces(2,3);",
-            processed
+                "So(1);   (1);many(1); (1);whitespaces(2,3);",
+                processed
         );
     }
 }
